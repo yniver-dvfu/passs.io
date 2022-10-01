@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ru">
+   <head>
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="apple-touch-icon" href="https://univer.dvfu.ru/favicon/android-app-icon.webp?v=wAXxPe8bK4">
+      <link rel="shortcut icon" type="image/x-icon" href="https://univer.dvfu.ru/favicon/favicon.ico?v=wAXxPe8bK4">
+      <link rel="icon" type="image/png" sizes="16x16" href="https://univer.dvfu.ru/favicon/favicon-16x16.png?v=wAXxPe8bK4">
+      <link rel="icon" type="image/png" sizes="32x32" href="https://univer.dvfu.ru/favicon/favicon-32x32.png?v=wAXxPe8bK4">
+      <link rel="icon" type="image/png" sizes="48x48" href="https://univer.dvfu.ru/favicon/favicon-48x48.png?v=wAXxPe8bK4">
+      <link rel="manifest" href="https://univer.dvfu.ru/favicon/site.webmanifest?v=wAXxPe8bK4">
+      <link rel="mask-icon" href="https://univer.dvfu.ru/favicon/safari-pinned-tab.svg?v=wAXxPe8bK4" color="#5bbad5">
+      <meta name="apple-mobile-web-app-title" content="Мой Универ">
+      <meta name="application-name" content="Мой Универ">
+      <meta name="msapplication-TileColor" content="#2b5797">
+      <meta name="msapplication-TileImage" content="/favicon/mstile-144x144.png?v=wAXxPe8bK4">
+      <meta name="theme-color" content="#ffffff">
+      <meta name="apple-itunes-app" content="app-id=1508108372">
+      <meta name="google-play-app" content="app-id=ru.dvfu.univermobile">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="android-touch-icon" href="https://univer.dvfu.ru/favicon/android-app-icon.webp?v=wAXxPe8bK4">
+      <title>Заказ пропусков</title>
+      <meta name="csrf-param" content="_csrf_univer">
+      <meta name="csrf-token" content="qcwTDb7Q9MfZj0mzMqpdQW8_A5I9YUhpzfVG-UgwlFrBr2JY3-WzlOnnKINm-CwxFUtApFcvMST0tyySLQjcGQ==">
+      <link href="css/style.css" rel="stylesheet">
+      <link href="css/pass_frontend.css" rel="stylesheet">
+      <link href="css/notification.css" rel="stylesheet">
+      <script async="" src="js/metrika-yandex-tag.js"></script><script>var appOptions = {"notificationUrl":"https:\/\/notify-univer.dvfu.ru\/api\/v1\/notifications","r":["freshman","undergraduate"],"t":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjU2MjgxODEsInVpZCI6MzcwMDksInVzZXJuYW1lIjoicm9kaW9ub3YucmEiLCJyb2xlIjoiYWRtaW4ifQ.ZPuePxktO0Uyogq1rNkNcVwlSrSZ_PoGEAwrbyCE4NM"};</script>
+      <style type="text/css">
+         .vue-modal-resizer {
+         display: block;
+         overflow: hidden;
+         position: absolute;
+         width: 12px;
+         height: 12px;
+         right: 0;
+         bottom: 0;
+         z-index: 9999999;
+         background: transparent;
+         cursor: se-resize;
+         }
+         .vue-modal-resizer::after {
+         display: block;
+         position: absolute;
+         content: '';
+         background: transparent;
+         left: 0;
+         top: 0;
+         width: 0;
+         height: 0;
+         border-bottom: 10px solid #ddd;
+         border-left: 10px solid transparent;
+         }
+         .vue-modal-resizer.clicked::after {
+         border-bottom: 10px solid #369be9;
+         }
+      </style>
+      <style type="text/css">
+         .v--modal-block-scroll {
+         overflow: hidden;
+         width: 100vw;
+         }
+         .v--modal-overlay {
+         position: fixed;
+         box-sizing: border-box;
+         left: 0;
+         top: 0;
+         width: 100%;
+         height: 100vh;
+         background: rgba(0, 0, 0, 0.2);
+         z-index: 999;
+         opacity: 1;
+         }
+         .v--modal-overlay.scrollable {
+         height: 100%;
+         min-height: 100vh;
+         overflow-y: auto;
+         -webkit-overflow-scrolling: touch;
+         }
+         .v--modal-overlay .v--modal-background-click {
+         width: 100%;
+         min-height: 100%;
+         height: auto;
+         }
+         .v--modal-overlay .v--modal-box {
+         position: relative;
+         overflow: hidden;
+         box-sizing: border-box;
+         }
+         .v--modal-overlay.scrollable .v--modal-box {
+         margin-bottom: 2px;
+         }
+         .v--modal {
+         background-color: white;
+         text-align: left;
+         border-radius: 3px;
+         box-shadow: 0 20px 60px -2px rgba(27, 33, 58, 0.4);
+         padding: 0;
+         }
+         .v--modal.v--modal-fullscreen {
+         width: 100vw;
+         height: 100vh;
+         margin: 0;
+         left: 0;
+         top: 0;
+         }
+         .v--modal-top-right {
+         display: block;
+         position: absolute;
+         right: 0;
+         top: 0;
+         }
+         .overlay-fade-enter-active,
+         .overlay-fade-leave-active {
+         transition: all 0.2s;
+         }
+         .overlay-fade-enter,
+         .overlay-fade-leave-active {
+         opacity: 0;
+         }
+         .nice-modal-fade-enter-active,
+         .nice-modal-fade-leave-active {
+         transition: all 0.4s;
+         }
+         .nice-modal-fade-enter,
+         .nice-modal-fade-leave-active {
+         opacity: 0;
+         transform: translateY(-20px);
+         }
+      </style>
+      <style type="text/css">
+         .vue-dialog div {
+         box-sizing: border-box;
+         }
+         .vue-dialog .dialog-flex {
+         width: 100%;
+         height: 100%;
+         }
+         .vue-dialog .dialog-content {
+         flex: 1 0 auto;
+         width: 100%;
+         padding: 15px;
+         font-size: 14px;
+         }
+         .vue-dialog .dialog-c-title {
+         font-weight: 600;
+         padding-bottom: 15px;
+         }
+         .vue-dialog .dialog-c-text {
+         }
+         .vue-dialog .vue-dialog-buttons {
+         display: flex;
+         flex: 0 1 auto;
+         width: 100%;
+         border-top: 1px solid #eee;
+         }
+         .vue-dialog .vue-dialog-buttons-none {
+         width: 100%;
+         padding-bottom: 15px;
+         }
+         .vue-dialog-button {
+         font-size: 12px !important;
+         background: transparent;
+         padding: 0;
+         margin: 0;
+         border: 0;
+         cursor: pointer;
+         box-sizing: border-box;
+         line-height: 40px;
+         height: 40px;
+         color: inherit;
+         font: inherit;
+         outline: none;
+         }
+         .vue-dialog-button:hover {
+         background: rgba(0, 0, 0, 0.01);
+         }
+         .vue-dialog-button:active {
+         background: rgba(0, 0, 0, 0.025);
+         }
+         .vue-dialog-button:not(:first-of-type) {
+         border-left: 1px solid #eee;
+         }
+      </style>
+   </head>
+   <body data-scrollprevented="false" data-new-gr-c-s-check-loaded="8.904.0" data-gr-ext-installed="" data-new-gr-c-s-loaded="8.904.0">
+      <div data-v-07b5c10e="" id="notify-bubble-layout" aria-atomic="true"></div>
+      <div class="panel" id="main">
+         <div class="blue-top-header top-blue-header bg-blueColour py-2 d-none d-lg-block">
+            <div class="container">
+               <div class="row">
+                  <div class="col d-none d-md-inline-block">
+                     <div class="">
+                        <div class="float-left">
+                           <a href="https://www.dvfu.ru/" title="ДВФУ" class="whiteColor text-uppercase font-weight-bold tc-whiteColor mb-0 mr-2 f-XS">www.dvfu.ru</a>
+                        </div>
+                        <div class="float-right">
+                           <a href="https://univer.dvfu.ru/contacts" title="Единый контактный центр" class="whiteColor text-uppercase font-weight-bold tc-whiteColor mb-0 mr-2 f-XS">Единый контактный центр</a>
+                           <a href="https://univer.dvfu.ru/feedback" title="Напишите нам" class="whiteColor text-uppercase font-weight-bold tc-whiteColor mb-0 mr-2 f-XS">Напишите нам</a>
+                           <a href="https://1citil.dvfu.ru/itil_win/ru_RU/" title="Техническая поддержка" class="whiteColor text-uppercase font-weight-bold tc-whiteColor mb-0 mr-2 f-XS">Техническая поддержка</a>
+                           <a href="#" class="bvi-open whiteColor text-uppercase font-weight-bold tc-whiteColor mb-0 mr-2 f-XS" title="Версия для слабовидящих"><i class="bvi-icon bvi-eye"></i> Версия для слабовидящих</a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="bg-blur mobile-menu-blur" id="bg-blur" style="display: none;"></div>
+         <header class="main-header " style="top: 0px;">
+            <div class="container">
+               <div class="row d-flex align-items-center">
+                  <div class="d-lg-none col-4 col-lg-3 align-baseline hamburger-btn">
+                     <button class="hamburger hamburger--spin color-gray" type="button" id="mobileMenuOpen">
+                     <span class="hamburger-box">
+                     <span class="hamburger-inner"></span>
+                     </span>
+                     </button>
+                  </div>
+                  <div id="menu" class="menu d-lg-none" style="display: none">
+                     <div class="menu-header"></div>
+                     <div class="overflow-y-scroll pt-2 pb-7" id="menu-content">
+                        <nav class="main-nav menu-vertical">
+                           <ul>
+                              <li>
+                                 <a href="https://www.dvfu.ru/" target="_blank">
+                                 <img src="img/icon-sm-dvfu.svg" class="menu-icon mr-1">
+                                 <span>Официальный сайт ДВФУ</span>
+                                 </a>
+                              </li>
+                              <li>
+                                 <a href="#" class="bvi-open">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye menu-icon mr-1">
+                                       <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                       <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                    <span>Версия для слабовидящих</span>
+                                 </a>
+                              </li>
+                           </ul>
+                        </nav>
+                        <nav class="main-nav menu-vertical">
+                           <ul>
+                              <li>
+                                 <a href="https://univer.dvfu.ru/contacts" class="menu-link js-service-link">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone-call menu-icon mr-1">
+                                       <path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                    </svg>
+                                    <span>Единый контактный центр</span>
+                                 </a>
+                              </li>
+                              <li>
+                                 <a href="https://univer.dvfu.ru/feedback" class="menu-link js-service-link">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-send menu-icon mr-1">
+                                       <line x1="22" y1="2" x2="11" y2="13"></line>
+                                       <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                    </svg>
+                                    <span>Напишите нам</span>
+                                 </a>
+                              </li>
+                              <li>
+                                 <a href="https://1citil.dvfu.ru/itil_win/ru_RU/" class="menu-link js-service-link">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-headphones menu-icon mr-1">
+                                       <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                                       <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+                                    </svg>
+                                    <span>Техническая поддержка</span>
+                                 </a>
+                              </li>
+                           </ul>
+                        </nav>
+                        <nav class="main-nav menu-vertical">
+                           <ul>
+                              <li>
+                                 <h3>Обучение</h3>
+                                 <ul>
+                                    <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/page/service/blackboard" data-service-id="5" data-service-title="Электронная образовательная среда BLACKBOARD" data-service-name="blackboard"><span class="service-icon menu-icon service-icon__blackboard"></span> <span>Электронная образовательная среда BLACKBOARD</span></a></li>
+                                    <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/gradebook" data-service-id="31" data-service-title="Зачётная книжка" data-service-name="new-egradebook"><span class="service-icon menu-icon service-icon__new-egradebook"></span> <span>Зачётная книжка</span></a></li>
+                                    <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/schedule" data-service-id="48" data-service-title="Расписание занятий" data-service-name="class-schedules"><span class="service-icon menu-icon service-icon__class-schedules"></span> <span>Расписание занятий</span></a></li>
+                                    <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/rau" data-service-id="65" data-service-title="Рейтинг" data-service-name="rau"><span class="service-icon menu-icon service-icon__rau"></span> <span>Рейтинг</span></a></li>
+                                    <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/profile/portfolio" data-service-id="67" data-service-title="Портфолио студента" data-service-name="portfolio-student"><span class="service-icon menu-icon service-icon__portfolio-student"></span> <span>Портфолио студента</span></a></li>
+                                    <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/brs/rating-plan/" data-service-id="69" data-service-title="Рейтинг-планы" data-service-name="rating-plans"><span class="service-icon menu-icon service-icon__rating-plans"></span> <span>Рейтинг-планы</span></a></li>
+                                 </ul>
+                              </li>
+                              <li>
+                                 <h3>Финансы</h3>
+                                 <ul>
+                                    <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/payment/grant" data-service-id="36" data-service-title="Стипендия" data-service-name="grant"><span class="service-icon menu-icon service-icon__grant"></span> <span>Стипендия</span></a></li>
+                                    <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/payment/contract/" data-service-id="85" data-service-title="Оплата договоров" data-service-name="contract-payment"><span class="service-icon menu-icon service-icon__contract-payment"></span> <span>Оплата договоров</span></a></li>
+                                    <li><a class="menu-link js-service-link" href="https://pay.dvfu.ru/" data-service-id="86" data-service-title="Сервис онлайн-платежей" data-service-name="pay-dvfu"><span class="service-icon menu-icon service-icon__pay-dvfu"></span> <span>Сервис онлайн-платежей</span></a></li>
+                                    <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/bank/choose-bank/index" data-service-id="88" data-service-title="Выбор банка" data-service-name="choose-bank"><span class="service-icon menu-icon service-icon__choose-bank"></span> <span>Выбор банка</span></a></li>
+                                 </ul>
+                              </li>
+                              <li>
+                                 <h3>Проживание</h3>
+                                 <ul>
+                                    <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/settle" data-service-id="63" data-service-title="Заселение 22-23" data-service-name="settle"><span class="service-icon menu-icon service-icon__settle"></span> <span>Заселение 22-23</span></a></li>
+                                    <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/resettle" data-service-id="70" data-service-title="Переселение" data-service-name="resettle"><span class="service-icon menu-icon service-icon__resettle"></span> <span>Переселение</span></a></li>
+                                    <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/accommodation" data-service-id="71" data-service-title="Проживание" data-service-name="accommodation"><span class="service-icon menu-icon service-icon__accommodation"></span> <span>Проживание</span></a></li>
+                                 </ul>
+                              </li>
+                              <li>
+                                 <h3>Заявки</h3>
+                                 <ul>
+                                    <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/mfc/default/enquiry?id=car-pass" data-service-id="1" data-service-title="Пропуск на автомобиль" data-service-name="car-pass"><span class="service-icon menu-icon service-icon__car-pass"></span> <span>Пропуск на автомобиль</span></a></li>
+                                    <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/page/service/vpn-access" data-service-id="15" data-service-title="VPN" data-service-name="vpn-access"><span class="service-icon menu-icon service-icon__vpn-access"></span> <span>VPN</span></a></li>
+                                    <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/mfc" data-service-id="80" data-service-title="Единое окно" data-service-name="mfc"><span class="service-icon menu-icon service-icon__mfc"></span> <span>Единое окно</span></a></li>
+                                 </ul>
+                              </li>
+                              <li>
+                                 <h3>Сервисы</h3>
+                                 <ul>
+                                    <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/page/service/email" data-service-id="16" data-service-title="Почта" data-service-name="email"><span class="service-icon menu-icon service-icon__email"></span> <span>Почта</span></a></li>
+                                    <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/page/service/library" data-service-id="21" data-service-title="Библиотека" data-service-name="library"><span class="service-icon menu-icon service-icon__library"></span> <span>Библиотека</span></a></li>
+                                    <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/phonebook" data-service-id="33" data-service-title="Телефонный справочник" data-service-name="phonebook"><span class="service-icon menu-icon service-icon__phonebook"></span> <span>Телефонный справочник</span></a></li>
+                                    <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/page/service/microsoft-office-365" data-service-id="38" data-service-title="MS Office 365" data-service-name="microsoft-office-365"><span class="service-icon menu-icon service-icon__microsoft-office-365"></span> <span>MS Office 365</span></a></li>
+                                    <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/page/service/wi-fi-access" data-service-id="47" data-service-title="Wi-Fi" data-service-name="wi-fi-access"><span class="service-icon menu-icon service-icon__wi-fi-access"></span> <span>Wi-Fi</span></a></li>
+                                    <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/pass" data-service-id="68" data-service-title="Заказ пропуска" data-service-name="pass"><span class="service-icon menu-icon service-icon__pass"></span> <span>Заказ пропуска</span></a></li>
+                                    <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/page/service/bus_schedule" data-service-id="75" data-service-title="Расписание автобусов" data-service-name="bus_schedule"><span class="service-icon menu-icon service-icon__bus_schedule"></span> <span>Расписание автобусов</span></a></li>
+                                    <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/page/service/mobile-app" data-service-id="83" data-service-title="Мобильное приложение «Мой Универ»" data-service-name="mobile-app"><span class="service-icon menu-icon service-icon__mobile-app"></span> <span>Мобильное приложение «Мой Универ»</span></a></li>
+                                    <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/studentProject" data-service-id="87" data-service-title="Твоя инициатива" data-service-name="student-project"><span class="service-icon menu-icon service-icon__student-project"></span> <span>Твоя инициатива</span></a></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </nav>
+                     </div>
+                  </div>
+                  <div class="col-4 col-lg-2 col-xl-2 px-1 logo-div">
+                     <a href="https://univer.dvfu.ru/" title="Мой Универ" class="border-0">
+                        <div id="desktopLogoDiv" class="d-none d-lg-block position-relative">
+                           <img id="desktopLogo" class="img-fluid position-relative main-logo" alt="Мой Универ" title="Мой Универ" src="img/img-myuniver-logo.svg">
+                           <img id="desktopLogoMin" class="img-fluid position-absolute main-logo my-auto" style="display: none; height: 40px; top: 0; bottom: 0;" alt="Мой Универ" title="Мой Универ" src="img/img-logo-symbol.svg">
+                        </div>
+                        <img id="mobileLogo" class="img-fluid d-lg-none position-relative main-logo" alt="Мой Универ" title="Мой Универ" src="img/img-logo-symbol.svg">
+                     </a>
+                  </div>
+                  <div class="d-none d-lg-block col-lg-8 col-xl-7 position-static">
+                     <nav class="main-nav menu-horizontal">
+                        <ul class="nav">
+                           <li>
+                              <a id="dropdown-study" class="btn btn-link dropdown-toggle f-M" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Обучение</a>
+                              <ul class="dropdown-menu shadow-dropdown" aria-labelledby="dropdown-study">
+                                 <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/page/service/blackboard" data-service-id="5" data-service-title="Электронная образовательная среда BLACKBOARD" data-service-name="blackboard"><span class="service-icon menu-icon service-icon__blackboard"></span> <span>Электронная образовательная среда BLACKBOARD</span></a></li>
+                                 <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/gradebook" data-service-id="31" data-service-title="Зачётная книжка" data-service-name="new-egradebook"><span class="service-icon menu-icon service-icon__new-egradebook"></span> <span>Зачётная книжка</span></a></li>
+                                 <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/schedule" data-service-id="48" data-service-title="Расписание занятий" data-service-name="class-schedules"><span class="service-icon menu-icon service-icon__class-schedules"></span> <span>Расписание занятий</span></a></li>
+                                 <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/rau" data-service-id="65" data-service-title="Рейтинг" data-service-name="rau"><span class="service-icon menu-icon service-icon__rau"></span> <span>Рейтинг</span></a></li>
+                                 <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/profile/portfolio" data-service-id="67" data-service-title="Портфолио студента" data-service-name="portfolio-student"><span class="service-icon menu-icon service-icon__portfolio-student"></span> <span>Портфолио студента</span></a></li>
+                                 <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/brs/rating-plan/" data-service-id="69" data-service-title="Рейтинг-планы" data-service-name="rating-plans"><span class="service-icon menu-icon service-icon__rating-plans"></span> <span>Рейтинг-планы</span></a></li>
+                              </ul>
+                           </li>
+                           <li>
+                              <a id="dropdown-finance" class="btn btn-link dropdown-toggle f-M" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Финансы</a>
+                              <ul class="dropdown-menu shadow-dropdown" aria-labelledby="dropdown-finance">
+                                 <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/payment/grant" data-service-id="36" data-service-title="Стипендия" data-service-name="grant"><span class="service-icon menu-icon service-icon__grant"></span> <span>Стипендия</span></a></li>
+                                 <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/payment/contract/" data-service-id="85" data-service-title="Оплата договоров" data-service-name="contract-payment"><span class="service-icon menu-icon service-icon__contract-payment"></span> <span>Оплата договоров</span></a></li>
+                                 <li><a class="menu-link js-service-link" href="https://pay.dvfu.ru/" data-service-id="86" data-service-title="Сервис онлайн-платежей" data-service-name="pay-dvfu"><span class="service-icon menu-icon service-icon__pay-dvfu"></span> <span>Сервис онлайн-платежей</span></a></li>
+                                 <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/bank/choose-bank/index" data-service-id="88" data-service-title="Выбор банка" data-service-name="choose-bank"><span class="service-icon menu-icon service-icon__choose-bank"></span> <span>Выбор банка</span></a></li>
+                              </ul>
+                           </li>
+                           <li>
+                              <a id="dropdown-accommodation" class="btn btn-link dropdown-toggle f-M" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Проживание</a>
+                              <ul class="dropdown-menu shadow-dropdown" aria-labelledby="dropdown-accommodation">
+                                 <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/settle" data-service-id="63" data-service-title="Заселение 22-23" data-service-name="settle"><span class="service-icon menu-icon service-icon__settle"></span> <span>Заселение 22-23</span></a></li>
+                                 <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/resettle" data-service-id="70" data-service-title="Переселение" data-service-name="resettle"><span class="service-icon menu-icon service-icon__resettle"></span> <span>Переселение</span></a></li>
+                                 <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/accommodation" data-service-id="71" data-service-title="Проживание" data-service-name="accommodation"><span class="service-icon menu-icon service-icon__accommodation"></span> <span>Проживание</span></a></li>
+                              </ul>
+                           </li>
+                           <li>
+                              <a id="dropdown-applications" class="btn btn-link dropdown-toggle f-M" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Заявки</a>
+                              <ul class="dropdown-menu shadow-dropdown" aria-labelledby="dropdown-applications">
+                                 <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/mfc/default/enquiry?id=car-pass" data-service-id="1" data-service-title="Пропуск на автомобиль" data-service-name="car-pass"><span class="service-icon menu-icon service-icon__car-pass"></span> <span>Пропуск на автомобиль</span></a></li>
+                                 <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/page/service/vpn-access" data-service-id="15" data-service-title="VPN" data-service-name="vpn-access"><span class="service-icon menu-icon service-icon__vpn-access"></span> <span>VPN</span></a></li>
+                                 <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/mfc" data-service-id="80" data-service-title="Единое окно" data-service-name="mfc"><span class="service-icon menu-icon service-icon__mfc"></span> <span>Единое окно</span></a></li>
+                              </ul>
+                           </li>
+                           <li>
+                              <a id="dropdown-services" class="btn btn-link dropdown-toggle f-M" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Сервисы</a>
+                              <ul class="dropdown-menu shadow-dropdown" aria-labelledby="dropdown-services">
+                                 <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/page/service/email" data-service-id="16" data-service-title="Почта" data-service-name="email"><span class="service-icon menu-icon service-icon__email"></span> <span>Почта</span></a></li>
+                                 <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/page/service/library" data-service-id="21" data-service-title="Библиотека" data-service-name="library"><span class="service-icon menu-icon service-icon__library"></span> <span>Библиотека</span></a></li>
+                                 <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/phonebook" data-service-id="33" data-service-title="Телефонный справочник" data-service-name="phonebook"><span class="service-icon menu-icon service-icon__phonebook"></span> <span>Телефонный справочник</span></a></li>
+                                 <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/page/service/microsoft-office-365" data-service-id="38" data-service-title="MS Office 365" data-service-name="microsoft-office-365"><span class="service-icon menu-icon service-icon__microsoft-office-365"></span> <span>MS Office 365</span></a></li>
+                                 <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/page/service/wi-fi-access" data-service-id="47" data-service-title="Wi-Fi" data-service-name="wi-fi-access"><span class="service-icon menu-icon service-icon__wi-fi-access"></span> <span>Wi-Fi</span></a></li>
+                                 <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/pass" data-service-id="68" data-service-title="Заказ пропуска" data-service-name="pass"><span class="service-icon menu-icon service-icon__pass"></span> <span>Заказ пропуска</span></a></li>
+                                 <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/page/service/bus_schedule" data-service-id="75" data-service-title="Расписание автобусов" data-service-name="bus_schedule"><span class="service-icon menu-icon service-icon__bus_schedule"></span> <span>Расписание автобусов</span></a></li>
+                                 <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/page/service/mobile-app" data-service-id="83" data-service-title="Мобильное приложение «Мой Универ»" data-service-name="mobile-app"><span class="service-icon menu-icon service-icon__mobile-app"></span> <span>Мобильное приложение «Мой Универ»</span></a></li>
+                                 <li><a class="menu-link js-service-link" href="https://univer.dvfu.ru/studentProject" data-service-id="87" data-service-title="Твоя инициатива" data-service-name="student-project"><span class="service-icon menu-icon service-icon__student-project"></span> <span>Твоя инициатива</span></a></li>
+                              </ul>
+                           </li>
+                        </ul>
+                     </nav>
+                  </div>
+                  <div class="col-4 col-lg-2 col-xl-3 pl-0 align-baseline">
+                     <nav class="actions-nav">
+                        <ul class="nav f-M justify-content-end">
+                           <li class="nav-item">
+                              <div data-v-3fcdad9e="" tabindex="-1" class="nav-link pl-0">
+                                 <div data-v-f65863aa="" data-v-3fcdad9e="" class="notification-popup shadow-dropdown d-none">
+                                    <!----> 
+                                    <h3 data-v-f65863aa="" class="nothing">У вас нет уведомлений</h3>
+                                 </div>
+                                 <i data-v-3fcdad9e="">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell">
+                                       <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                       <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                                    </svg>
+                                 </i>
+                                 <!---->
+                              </div>
+                           </li>
+                           <li class="nav-item pl-sm-0">
+                              <a href="#" class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                              </a>
+                              <div class="d-inline">
+                                 <a href="#" class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user icon-user-profile">
+                                       <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                       <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                    <span class="d-none d-xl-inline-block user-profile-name" title="Родионов Р. А.">
+                                    Родионов Р. А.                                        </span>
+                                    <span class="d-none d-md-inline dropdown-toggle"></span>
+                                 </a>
+                                 <div class="dropdown-menu shadow-dropdown">
+                                    <a href="#" class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                       <div class="dropdown-item">
+                                          <img style="width: 20px; height: 20px" src="img/icon-wow-coin.png">
+                                          <span data-url="/get-coin" id="coin-balance">100</span>
+                                       </div>
+                                       <div class="dropdown-divider"></div>
+                                    </a>
+                                    <a href="#" class="dropdown-item d-none d-md-block d-lg-none" data-toggle="tooltip" data-placement="top" title="Уведомления">
+                                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell icon-N mr-1">
+                                          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                          <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                                       </svg>
+                                       Уведомления
+                                    </a>
+                                    <a class="dropdown-item" href="https://univer.dvfu.ru/profile">
+                                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user icon-N mr-1">
+                                          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                          <circle cx="12" cy="7" r="4"></circle>
+                                       </svg>
+                                       Профиль
+                                    </a>
+                                    <a class="dropdown-item" href="https://univer.dvfu.ru/userRequest">
+                                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list icon-N mr-1">
+                                          <line x1="8" y1="6" x2="21" y2="6"></line>
+                                          <line x1="8" y1="12" x2="21" y2="12"></line>
+                                          <line x1="8" y1="18" x2="21" y2="18"></line>
+                                          <line x1="3" y1="6" x2="3" y2="6"></line>
+                                          <line x1="3" y1="12" x2="3" y2="12"></line>
+                                          <line x1="3" y1="18" x2="3" y2="18"></line>
+                                       </svg>
+                                       Мои заявки
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="https://esa.dvfu.ru/logout">
+                                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out icon-N">
+                                          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                          <polyline points="16 17 21 12 16 7"></polyline>
+                                          <line x1="21" y1="12" x2="9" y2="12"></line>
+                                       </svg>
+                                       Выход
+                                    </a>
+                                 </div>
+                              </div>
+                           </li>
+                        </ul>
+                     </nav>
+                  </div>
+               </div>
+            </div>
+         </header>
+         <div class="content my-3 mb-6">
+            <div class="container mb-3">
+               <div class="row justify-content-center">
+                  <div class="col-xl-6 col-lg-8 col-md-12">
+                     <div class="card">
+                        <div class="card-body text-center p-5">
+                           <img src="img/icon-pass-received.png" alt="">                    
+                           <p>
+                              Спасибо, что 
+                              получили пропуск, не забывайте брать его с собой.                       
+                           </p>
+                           <div class="row">
+                              <div class="col-md-6 text-center">
+                                 <div class="mb-1"><strong>Фронтальная сторона</strong></div>
+                                 <img src="img/sem-1-rodionov-roman-aleksandrovic-front.png" class="img-fluid" alt="Фронтальная сторона">
+                              </div>
+                              <div class="col-md-6 text-center">
+                                 <div class="mb-1"><strong>Задняя сторона</strong></div>
+                                 <img src="img/sem-1-rodionov-roman-aleksandrovic-back.png" class="img-fluid" alt="Задняя сторона">
+                              </div>
+                           </div>
+                           <div class="mt-3 text-center">
+                              <a href="https://univer.dvfu.ru/pass/wallet/save-apple-wallet-pass"><img src="img/btn-add-to-apple-wallet.svg" alt="" style="width: 200px; height: auto"></a>                                                    
+                           </div>
+                           <!--<script src="https://apis.google.com/js/platform.js" type="text/javascript"></script>
+                              <g:savetoandroidpay jwt=""
+                                  onsuccess="successHandler"
+                                  onfailure="failureHandler"
+                                  height="large"
+                                  size="large"
+                                  theme="dark">
+                              </g:savetoandroidpay>-->
+                        </div>
+                        <div id="accordion">
+                           <div class="mb-4">
+                              <div id="headingOne">
+                                 <h5 class="">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Как заменить пропуск в случае утери
+                                    </button>
+                                 </h5>
+                              </div>
+                              <div id="collapseOne" class="m-2 collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                 <div>
+                                    <p>Обратиться в департамент комплексной безопасности в корпусе 9, кабинет 10.</p>
+                                    <p>Время работы: пн-пт 09:00-18:00, перерыв 13:00-14:00.</p>
+                                    <p>При себе иметь: паспорт</p>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="mb-4">
+                              <div id="headingTwo">
+                                 <h5 class="">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Как перевыпустить пропуск при изменении данных
+                                    </button>
+                                 </h5>
+                              </div>
+                              <div id="collapseTwo" class="m-2 collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                 <div>
+                                    <p>Если изменились ФИО, должность, название подразделения и т.п. то нужно обратиться в бюро пропусков в корпусе "С" кабинет С617.</p>
+                                    <p>Время работы: пн-пт 09:00-18:00, перерыв 13:00-14:00.</p>
+                                    <p>При себе иметь: паспорт и старый пропуск.</p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <footer class="footer bg-whiteColour py-6 main-footer">
+            <div class="container">
+               <div class="row">
+                  <div class="col-12 col-md-6 col-lg-8">
+                     <p>© 2022 «Мой Универ». Управление информатизации ДВФУ.<br>
+                        Информация, размещённая на&nbsp;данном сайте, является собственностью 
+                        ДВФУ. Любое копирование материалов сайта без&nbsp;разрешения владельца 
+                        запрещено.
+                     </p>
+                  </div>
+                  <div class="col-6 col-md-3 col-lg-2 d-lg-none">
+                     <a class="no-underline" id="bottom" href="https://apps.apple.com/app/id1508108372" target="_blank">
+                     <img src="img/btn-appstore.png" class="img-fluid" alt="Установить приложение для iOS">
+                     </a>
+                  </div>
+                  <div class="col-6 col-md-3 col-lg-2 d-lg-none">
+                     <a class="no-underline" href="https://play.google.com/store/apps/details?id=ru.dvfu.univermobile" target="_blank">
+                     <img src="img/btn-googleplay.png" class="img-fluid" alt="Установить приложение для Android">
+                     </a>
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-8">
+                     <a href="#" class="bvi-open text-dark text-uppercase font-weight-bold mb-0 mr-2 f-S" title="Версия для слабовидящих">
+                     <i class="bvi-icon bvi-eye"></i>
+                     Версия для слабовидящих                    </a>
+                  </div>
+               </div>
+            </div>
+         </footer>
+      </div>
+      <div data-v-fad4f8aa=""></div>
+      <!-- Modal -->
+      <div class="modal fade" id="jsModal" tabindex="-1" role="dialog" aria-labelledby="jsModalTitle" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="jsModalTitle"></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                  </button>
+               </div>
+               <div class="modal-body" id="jsModalBody">
+               </div>
+               <div class="modal-footer" id="jsModalFooter">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+               </div>
+            </div>
+         </div>
+      </div>
+      <script src="js/jquery.min.js"></script>
+      <script src="js/yii.js"></script>
+      <script src="js/app_002.js"></script>
+      <script src="js/notification.js"></script>
+      <script src="js/app.js"></script>    <!-- Global site tag (gtag.js) - Google Analytics -->
+      <!--<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132455446-2"></script>
+         <script>
+             window.dataLayer = window.dataLayer || [];
+             function gtag(){dataLayer.push(arguments);}
+             gtag('js', new Date());
+         
+             gtag('config', 'UA-132455446-2');
+         </script>-->
+      <!-- Yandex.Metrika counter -->
+      <script type="text/javascript">
+         (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+             m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+         (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+         
+         ym(51912464, "init", {
+             id:51912464,
+             clickmap:true,
+             trackLinks:true,
+             accurateTrackBounce:true,
+             webvisor:true
+         });
+      </script>
+      <noscript>
+         <div><img src="https://mc.yandex.ru/watch/51912464" style="position:absolute; left:-9999px;" alt="" /></div>
+      </noscript>
+      <!-- /Yandex.Metrika counter -->
+   </body>
+   <grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>
+</html>
